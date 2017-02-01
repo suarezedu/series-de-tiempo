@@ -1,0 +1,7 @@
+temporal<-tempfile()
+download.file("http://www.beta.inegi.org.mx/contenidos/proyectos/enchogares/modulos/mti/2015/microdatos/mti2015_bases_conapo_DBF.zip", temporal)
+files=unzip(temporal, list=TRUE)$Name
+unzip(temporal, files=files[grepl("dbf", files)])
+install.packages("foreign")
+require(foreign)
+SDEMT<-data.frame(read.dbf("mti2015_sdem_0a4_y_18ymas.DBF"))
