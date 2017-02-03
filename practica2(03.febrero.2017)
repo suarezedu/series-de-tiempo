@@ -1,0 +1,8 @@
+data("AirPassengers")
+class(AirPassengers)
+start(AirPassengers) ##donde inicia
+end(AirPassengers) ##donde acaba
+frequency(AirPassengers)
+summary(AirPassengers) ##resumen de estadisticas descriptivas
+plot(AirPassengers)
+##secu 
