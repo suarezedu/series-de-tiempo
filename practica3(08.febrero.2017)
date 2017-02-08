@@ -1,0 +1,25 @@
+##simulacion de series de tiempo##
+##vamos a simular el indicador
+##para la simulacion en principio necesitamos alguna informacion
+##valor maximo, minimo, el numero de datos
+
+##en este ejemplo vamos a proponer la poblacion en Mexico
+##que el valor minimo seran 100, max=120, 15 datos que inicie en 2000
+pob<-sample(100:120,15,replace=F) ##rango, datos a generar, 
+##la convertimos en serie de tiempo
+pobts<-ts(pob,frequency=1,start=(2000)) ## frequency=1 anual
+end(pobts)
+start(pobts)
+plot(aggregate(pobts))
+##impotar csv
+infor<-ts(read.csv(("C:\\Users\\Sala-D1\\Downloads\\info.csv")),frequency=4,start=(2005))
+infor
+length(infor)
+
+infor2<-read.csv(("C:\\Users\\Sala-D1\\Downloads\\st.csv"))
+inforts<-ts(infor2, frequency=4,start=(2005))
+
+desocupa<-ts(infor2[,1], start=2005, freq=4)
+ocup_parcial<-ts(infor2[,2], start=2005, freq=4)
+asalariado<-ts(infor2[,3], start=2005, freq=4)
+condiciones<-ts(infor2[,4], start=2005, freq=4)
