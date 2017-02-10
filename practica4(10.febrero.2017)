@@ -1,0 +1,26 @@
+numprof<-sample(5:8,60,replace=TRUE)
+crepib<-sample(0:5,60,replace=TRUE)
+ocupados<-sample(40:60,60,replace=TRUE)
+desocupados<-sample(3:8,60,replace=TRUE)
+pceu<-data.frame(numprof,crepib,ocupados,desocupados)
+pceu[1:12,]
+pceu[49:60,]
+View(pceu)
+tsprof<-ts(numprof,frequency=12,start=(2010))
+tscrepib<-ts(crepib,frequency=12,start=(2010))
+tsocupados<-ts(ocupados,frequency=12,start=(2010))
+tsdesocupados<-ts(desocupados,frequency=12,start=(2010))
+tspceu<-ts(pceu,frequency=12,start=(2010))
+###profesionistas y ocupados en la misma grafica
+plot(cbind(tsprof,tsocupados))
+plot(cbind(tscrepib,tsdesocupados))
+plot(cbind(tsprof,tsocupados,tscrepib,tsdesocupados))
+plot.ts(pceu[,c(1,3)])
+pceusts<-ts.intersect(pceu)
+1980,2015
+
+
+##serie pib
+
+pib<-read.csv("C:\\Users\\Sala-D1\\Desktop\\pib.csv")
+tspib<-ts(pib,frequency=1,start(1980))
