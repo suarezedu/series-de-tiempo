@@ -1,0 +1,32 @@
+##Para descomponer una serie de tiempo graficamente se utiliza
+##la funcion decompose, por lo que primero
+## es importante reconocer la serie de tiempo y despues aplicar la funcion graficamente
+desoc<-sample(3:8,44,replace=T)
+tdesoc<-ts(desoc,frequency=4,start=2005)
+plot(decompose(tdesoc))
+##con seasonal verificamos la estacionariedad
+plot(tdesoc)
+
+
+##ejemplo
+pib<-read.csv("C:\\Users\\Sala-D1\\Desktop\\pibg.csv")
+tspib<-ts(pib,frequency=4,start=(2007))
+plot(tspib)
+plot(decompose(tspib))
+dtspib<-decompose(tspib)
+names(dtspib)
+dtspib$trend  ##para mostrar los datos graficados de tendencia
+dtspib$seasonal
+dtspib$random
+
+##ejercicio de Marko
+m<-read.csv("C:\\Users\\Sala-D1\\Desktop\\mar.csv",header=F)
+base<-m[9:43,11]
+tsbase<-ts(base,frequency=12,start=(2014))
+plot(tsbase)
+plot(decompose(tsbase))
+dtsbase<-decompose(tsbase)
+names(dtsbase)
+dtsbase$trend  
+dtsbase$seasonal
+dtsbase$random
