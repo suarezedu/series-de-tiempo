@@ -1,0 +1,13 @@
+t<-read.csv("C:\\Users\\Sala-D1\\Downloads\\tarea2.csv",header=T)
+tds<-ts(t,frequency=4,start=(2006))
+tds
+
+x1<-mean(tds[1:4,])
+x2<-mean(tds[2:5,])
+s<-1
+for(i in tds)
+{
+x[s]<-tds[s:s+3]
+s=s+1
+print(mean(x))
+}
