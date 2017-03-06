@@ -1,0 +1,21 @@
+install.packages("fpp")
+require(fpp)
+plot(window(elec,start=1980),ylab="Gwh",xlab="year",main="australian electricity production")
+seasonplot(elec,s=12,year.labels=TRUE,main="electricidad",ylab="año",xlab="años",col=rainbow(20),year.labels.left=TRUE,pch=15)
+##ESTA, TENDENCIA Y CICLO
+
+plot(bricksq,ylab="million units",xlab="year",main="australian clay brick production")
+seasonplot(bricksq,s=4,year.labels=F,main="electricidad",ylab="año",xlab="años",col=rainbow(20),year.labels.left=TRUE,pch=10)
+##ESTA,CICLO NO MUCHO Y TENDENCIA
+
+plot(hsales,main="sales of new one-family houses,USA",ylab="total sales",xlab="year")
+seasonplot(hsales,s=12,year.labels=F,main="electricidad",ylab="año",xlab="años",col=rainbow(20),year.labels.left=TRUE,pch=10)
+##NO ESTA NI TENDENCIA, POSIBLE CICLO
+
+dec<-decompose(bricksq)
+##eliminando tendencia
+sinesta<-bricksq-dec$seasonal
+sintend<-bricksq-dec$trend
+
+plot(sinesta)
+plot(sintend)
