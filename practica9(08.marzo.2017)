@@ -1,0 +1,36 @@
+##cuando usar modelo aditivo o multiplicativo
+
+##aditivo se utiliza cunado la magnitud de las fluctuaciones estacionales
+##de la serie no vaira al hacerlo la tendencia
+
+##multiplicativo
+##cuando la magnitud de las fluctuaciones estacionales de la serie
+##crece y decrece proporcionalmente con los crecimiento y decrecimientos
+##de la tendencia
+
+##para descomponer una serie en un modelo aditivo
+deso<-data.frame(read.csv("C:\\Users\\Sala-D1\\Downloads\\tarea2.csv"))
+desot<-ts(deso,frequency=4,start=2005)
+plot(desot)
+lines(eeadj,col="blue") ##aqui va la serie y la serie sin estacionariedad
+
+dectsd<-decompose(desot)
+dectsdmul<-decompose(desot,type="mult") ###aqui esta el multiplicativo
+
+##graficamos los modelos 
+plot(dectsd)
+plot(dectsdmul)
+
+##       desestacionalizar una serie       #####
+##se desestacionaliza una serie de tiempo por diferentes razones
+##entre las que se destacan desestacionalizar para poder predecir
+##nuestros datos con mayor precision y sin contar con factores externos
+##externos al comportamiento de nuestros datos
+
+require(fpp)
+eeadj<-seasadj(dectsd)
+eeadj
+plot(eeadj)
+sinesta<-desot-dectsd$seasonal
+sinesta
+eeadj-sinesta
