@@ -1,0 +1,19 @@
+pib<-read.csv("C:\\Users\\TEMP.RTIC-E30-HP.000\\Downloads\\PIB60-15.csv")
+pib2<-pib[1:19,]
+pib2
+tspib<-ts(pib2,frequency=1,start=1961)
+plot(tspib,xlab="años",ylab="pib",main="desarrollo pib",asp=1)
+##Observamos que existen tres ciclos, 1969, 1971 y 1977
+##De 1969
+##se considera que existia un detenimiento en el desarrollo de la industrializacion
+##debido a la mala racha que estaba pasando en estado unidos, desde hace ya algunos años,}
+##en donde se presentaban principalmente altas inflaciones y devaluaciones, que afectaron a nivel mundial
+##dentro del contexto nacional, Mexico se estaba reactivando respecto a los movimientos sociales que surgieron
+##en el 68. Una caracteristica escencial es que se expresa una inestabilidad creciente, se considera 
+##que es un periodo de freno y arranque de la economia
+
+##entre el 76 y 77 la inflacion comienza a crecer, y esto se explica como un ajuste
+##de los precios relativos, el tipo de cambio es estable, hasta que se presenta la devaluacion 
+##del 76, en donde los salarios alcanzan su punto maximo.Sin embargo, en el 77 se sufre
+##una devaluacion mayor. La balanza comercial es deficitaria a lo largo del periodo.Sin embargo, sufre 
+##un superavit en el 77, donde las exportaciones comienzan a ser mayores.
