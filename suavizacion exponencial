@@ -1,0 +1,17 @@
+##numero de quejas recibidas de una organizacion de monitoreo
+## mensual, durante cuatro años de 1996 a 1999 
+##estimar nivel actual de reclamos (2000) y la tendencia
+
+###suavizacion exponencial
+###suavizacion exponencial sin tendencia ni componente estacional 
+
+www <- "http://www.massey.ac.nz/~pscowper/ts/motororg.dat"
+Motor.dat <- read.table(www, header = T);attach(Motor.dat)
+Comp.ts <- ts(complaints, start = c(1996, 1), freq = 12)
+plot(Comp.ts, xlab = "Time / months", ylab = "Complaints")
+##HoltWinters alfa,beta, gama, si alfa=0	entonces minimiza el error
+Comp.hw1 <- HoltWinters(complaints, beta = 0, gamma = 0) ; Comp.hw1
+plot(Comp.hw1)
+Comp.hw1$SSE
+Comp.hw2 <- HoltWinters(complaints, alpha = 0.2, beta=0, gamma=0)
+Comp.hw2
