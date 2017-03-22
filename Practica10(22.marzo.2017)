@@ -1,0 +1,34 @@
+desoc<-read.csv("C:\\Users\\Sala-D2\\Downloads\\tarea2.csv")
+pib<-read.csv("C:\\Users\\Sala-D2\\Desktop\\PIB México.csv")
+pibt<-ts(pib)
+desoct<-ts(desoc,frequency=4,start=2005)
+acf(pibt)
+acf(desoct)
+
+##Buscar una ST con ruido blanco y otra con caminata aleatoria (para Mexico)
+
+####  Modelos lineales para pronosticar   ####
+## aplicacion de pronosticos lineales
+## como el ingenuo, promedio, ingenuo estacional y el de la derivada
+install.packages("forecast")
+require(forecast)
+
+### 1.INGENUO
+## el pronostico ingenuo esta basado en la ultima observacion que arroja la ST
+## es decir que la observacion mas importante es la ultima
+
+naive(pibt,h=4)
+
+### 2.PROMEDIO
+## le da el mismo peso a todos los datos u observaciones, es decir, todas tienen
+## la misma importancia
+
+meanf(desoct,h=4)
+plot(meanf(desoct,h=4))
+
+### 2.INGENUO ESTACIONAL
+## este metodo se utiliza es ST con alta estacionalidad
+## le da la mayor ponderación al dato del mismo periodo en el año anterior
+## ejemplo: 2 trimestre de 2005 es igual al 2 trimestre de 2006
+
+snaive(desoct,h=4)
