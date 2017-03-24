@@ -1,0 +1,21 @@
+## metodo de la deriva
+## este metodo consiste en que el pronostico puede incrementar
+## o disminuir en el tiempo, dependiendo de los cambios historicos de la ST
+desoc<-read.csv("C:\\Users\\Sala-D1\\Downloads\\tarea2.csv")
+desocst<-ts(desoc)
+install.packages("forecast")
+require(forecast)
+
+desocmod1<-fittedf(desocst,h=4)
+desocmod2<-naive(desocst,h=4)
+desocmod3<-snaive(desocst,h=4)
+desocmod4<-rwf(desocst,h=4,drift=TRUE)
+x11()
+plot(desocmod1,main="pronostico de desocupacion trimestral")
+lines(desocmod2$fitted,col=5)
+lines(desocmod3$fitted,col=6)
+lines(desocmod4$fitted,col=7)
+legend("topleft",lty=1,col=c(5,6,7,8),legend=c("media","ingenuo","ingenuo estacional","deriva"))
+x11()
+plot(desocst)
+names(desocmod2)
