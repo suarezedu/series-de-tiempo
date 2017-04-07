@@ -1,0 +1,31 @@
+deso<-read.csv("C:\\Users\\Sala-D1\\Downloads\\tarea2.csv")
+des<-ts(deso,frequency=4,start=2005)
+require(fpp)
+mod1<-ses(des,alpha=.1,initial="simple",h=8)
+mod2<-ses(des,alpha=.3,initial="simple",h=8)
+mod3<-ses(des,alpha=.9,initial="simple",h=8)
+mod4<-ses(des,alpha=.95,initial="simple",h=8)
+plot(mod1,ylab="pib",xlab="años",main="pib",type="o")
+lines(fitted(mod1),col="brown",type="o")
+lines(fitted(mod2),col="brown",type="o")
+lines(fitted(mod3),col="brown",type="o")
+lines(fitted(mod4),col="brown",type="o")
+##analisis de residuales
+a1<-des-mod1$fitted
+mean(abs(a1))###MAE
+sqrt(mean(a1^2))##RMSE
+a2<-des-mod2$fitted
+mean(abs(a2))###MAE
+sqrt(mean(a2^2))##RMSE
+a3<-des-mod3$fitted
+mean(abs(a3))###MAE
+sqrt(mean(a3^2))##RMSE
+a4<-des-mod3$fitted
+mean(abs(a4))###MAE
+sqrt(mean(a4^2))##RMSE
+
+###MAE y RMSE con funcion
+evalm1<-accuracy(mod1);evalm2<-accuracy(mod2);evalm3<-accuracy(mod3);evalm4<-accuracy(mod4)
+evalm1;evalm2;evalm3;evalm4
+
+###graficamente y con MAE ,el modelo 3 se escoge,  son mas cercanos a los reales 
