@@ -1,0 +1,21 @@
+base<-read.csv("C:\\Users\\Sala-D1\\Downloads\\table (2).csv")
+base2<-base[2:261,5]
+icats<-ts(base2,frequency=261,start=2016)
+require(fpp)
+mod1<-ses(icats,alpha=.2,initial="simple",h=8)
+mod2<-ses(icats,alpha=.4,initial="simple",h=8)
+mod3<-ses(icats,alpha=.6,initial="simple",h=8)
+mod4<-ses(icats,alpha=.8,initial="simple",h=8)
+plot(icats,ylab="pib",xlab="años",main="pib",type="o")
+lines(fitted(mod1),col="brown",type="o")
+lines(fitted(mod2),col="red",type="o")
+lines(fitted(mod3),col="green",type="o")
+lines(fitted(mod4),col="blue",type="o")
+evalm1<-accuracy(mod1);evalm2<-accuracy(mod2);evalm3<-accuracy(mod3);evalm4<-accuracy(mod4)
+evalm1;evalm2;evalm3;evalm4
+
+m1<-evalm1[,2:3]
+m2<-evalm2[,2:3]
+m3<-evalm3[,2:3]
+m4<-evalm4[,2:3]
+maermse<-data.frame(m1,m2,m3,m4)
