@@ -1,0 +1,20 @@
+#mod2<-hw(serieconestacionalidad,seasonal="additive")
+#mod3<-hw(serieconestacionalidad,seasonal="multiplicative")
+pib<-read.csv("C:\\Users\\Sala-D1\\Downloads\\PIB México.csv")
+tsp<-pib[10:45,2]
+tspib<-ts(tsp,frequency=4,start=2007)
+serie<-window(tspib,start=c(2007,1),end=c(2015,1))
+s2<-window(tspib,start=c(2015,2),end=c(2015,4))
+start(tspib);end(tspib)
+x11()
+plot(tspib)
+library(fpp)
+mod1<-hw(serie,seasonal="additive")
+mod2<-hw(serie,seasonal="multiplicative")
+mod3<-holt(serie,damped=T)
+x11()
+plot(mod1,main="pronostico trimestral")
+lines(s2,col="black")
+lines(mod1$mean,col="blue") ##aditivo
+lines(mod2$mean,col="green") ##multiplicativo
+lines(mod3$mean,col="red") ##tendencia aditiva amortiguado
