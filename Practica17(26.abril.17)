@@ -1,0 +1,65 @@
+pib<-read.csv("C:\\Users\\Sala-D2\\Desktop\\PIBB.csv")
+ica<-read.csv("C:\\Users\\Sala-D2\\Desktop\\ICA.csv")
+bimbo<-read.csv("C:\\Users\\Sala-D2\\Desktop\\BIMBO.csv")
+dolar<-read.csv("C:\\Users\\Sala-D2\\Desktop\\DOLAR.csv")
+f<-pib[38:54,2]
+f1<-ica[1:261,2]
+f2<-bimbo[1:261,2]
+f3<-dolar[1:125,2]
+pibts<-ts(f, frequency=1, start=1999)
+icats<-ts(f1, frequency=252, start=2016)
+bimbots<-ts(f2, frequency=252, start=2016)
+dolarts<-ts(f3, frequency=252, start=2016)
+
+x11()
+plot(pibts, mean="SERIE PIB", xlab="tiempo", ylab="%")
+x11()
+plot(icats, mean="SERIE ICA", xlab="tiempo", ylab="precio cierre")
+x11()
+plot(bimbots, mean="SERIE BIMBO", xlab="tiempo", ylab="precio cierre")
+x11()
+plot(dolarts, mean="SERIE DOLAR", xlab="tiempo", ylab="cotización")
+
+############PIB
+library(fpp)
+pibmod1<-meanf(pibts, h=4) 
+pibmod2<-naive(pibts, h=4)
+pibmod3<-snaive(pibts, h=4)
+pibmod4<-rwf(pibts, h=4, drift=T)
+
+
+x11()
+plot(pibmod1, mean="Pronostico promedio PIB")
+lines(pibmod2$mean, col="blue")
+lines(pibmod3$mean, col="pink")
+lines(pibmod4$mean, col="red")
+lines(pibmod2$fitted, col="blue")
+lines(pibmod3$fitted, col="pink")
+lines(pibmod4$fitted, col="red")
+
+
+pibmod3s<-ses(pibts, alpha=.95,initial="simple", h=4)
+x11()
+plot(pibmod3s, mean="Pronostico promedio PIB")
+lines(pibmod3s$mean, col="blue")
+lines(pibmod3s$fitted, col="blue")
+
+mod1<-hw(pibts,seasonal="additive")
+mod2<-hw(pibts,seasonal="multiplicative")
+
+
+fit1<-holt(pibts,alpha=.7,beta=.8,initial="simple",h=5)
+fit2<-holt(pibts,alpha=.7,beta=.8,initial="simple",exponential=T,h=5)
+fit3<-holt(pibts,damped=T)
+fit4<-holt(pibts,exponential=T,damped=T)
+
+x11()
+plot(fit1,main="pronostico anual")
+lines(fit1$mean,col="blue")
+lines(fit2$mean,col="green")
+lines(fit3$mean,col="red")
+lines(fit4$mean,col="purple")
+lines(fit1$fitted,col="blue")
+lines(fit2$fitted,col="green")
+lines(fit3$fitted,col="red")
+lines(fit4$fitted,col="purple")
